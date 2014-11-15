@@ -1,0 +1,89 @@
+
+.heading {
+	font-size: 24px;
+	font-family: 'Helvetica';
+	text-align: center;
+	border-bottom: 2px;
+	padding-bottom: 30px;
+}
+
+.row #picturecontainer {
+	text-align: center;
+	padding-bottom: 30px;
+}
+
+.btn-custom {
+	color: white;
+}
+
+.navbar {
+	background-color: white;
+	opacity: .9;
+	color: black;
+	font-family: 'Lato';
+	font-size: 24px;
+}
+
+.progress-bar {
+	background-color: #E67F53;
+}
+
+.bg {
+background-color:#456D96;
+
+}
+.row {
+	border-color: black;
+	border-width: 2px;
+}
+
+.container {
+padding-bottom: 30px;
+}
+
+#right {
+	border-left: 1px solid white;
+}
+
+object{
+height: 500px;
+width: 500px;
+border: 3px solid #eeeeee;
+}
+
+#swag {
+	width: 300px;
+	padding-top: 30px;
+	margin: 0 auto;
+}
+
+.ratingscontainer {
+	margin-top: 30px;
+	width: 800px;
+	margin-left: 36%;
+	float:left;
+}
+
+#comment {
+	width: 300px;
+	float: left;
+	margin-left: auto;
+	margin-right: auto;
+	position:relative;
+}
+
+#rating {
+	width: 80px;
+	margin-top: 40px;
+	margin-left: 320px;
+
+}
+
+#next {
+	margin-top: 20px;
+	margin-left: 117px;
+}
+
+#next:hover {
+	opacity: .4;
+}
