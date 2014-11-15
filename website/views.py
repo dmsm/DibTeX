@@ -47,7 +47,7 @@ def grader(request):
         problems = package_problems.problem_answer_pairings(a)
         list_of_list_of_problems.append(problems)
 
-    return render(request, "grader.html", {'problem_solution_pair_list': list_of_list_of_problems})
+    return render(request, "grader.html", {'problem_solution_pair_list_list': list_of_list_of_problems})
 
 
 def process_prof_file(file):

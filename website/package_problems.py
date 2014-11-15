@@ -17,7 +17,7 @@ def problem_answer_pairings(asgt):
 
         solution_file = open("SOLUTIONS" + "-" + a_n + "-" + name, 'a')
         print(r"\begin{solution}", file=solution_file)
-        print(asgt.problems[i].solution)
+        print(asgt.problems[i].solution, file=solution_file)
         print(r"\end{solution}", file=solution_file)
         problem_pairings.append(problem_file, solution_file)
 
