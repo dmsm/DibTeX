@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 import re
+import os
 import aggregator
 from website.models import Assignment, Problem
 
@@ -30,7 +31,6 @@ def process_prof_file(file):
     asgt = Assignment(name=name, due_date=due_date)
     asgt.save()
 
-
     problem_locs = [m.end() for m in re.finditer("begin{problem}", data)]
 
     for loc in problem_locs:
@@ -39,7 +39,7 @@ def process_prof_file(file):
         p.name = m.group(1)
         n = re.search(r"\[([^]]*)\]", data[loc+m.end():])
         p.points = n.group(1)
-        o = re.search(r"([^]]*)\\end{problem}", data[loc + m.end() + n.end():])
+        o = re.search(r"([^]]*)\end{problem}", data[loc + m.end() + n.end():])
         p.contents = o.group(1)
         q = re.search(r"begin{solution}([^]]*)\\end{solution}", data[loc + m.end() + n.end() + o.end():])
         p.solution = q.group(1)
@@ -47,13 +47,14 @@ def process_prof_file(file):
         asgt.problems.add(p)
 
     strip_solutions(asgt)
+    os.system("pdflatex %s" % asgt.name.replace(" ", "") + aggregator.TEX_FILE)
 
 def strip_solutions(asgt):
-    problems_file = open(asgt.name + aggregator.TEX_FILE, 'w')
+    problems_file = open(asgt.name.replace(" ", "") + aggregator.TEX_FILE, 'w')
     aggregator.print_header(problems_file)
-    print(r"\\name{" + asgt.name + "}", file=problems_file)
+    print(r"\name{" + asgt.name + "}", file=problems_file)
     print(r"\duedate{" + asgt.due_date + "}", file=problems_file)
-    print(r"\\begin{document}", file=problems_file)
+    print(r"\begin{document}", file=problems_file)
     for p in asgt.problems.all():
         print(r"\begin{problem}[" + p.name + "][" + str(p.points) + r"]", file=problems_file)
         print(p.contents, file=problems_file)

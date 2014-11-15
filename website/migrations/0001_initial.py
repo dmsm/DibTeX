@@ -28,6 +28,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=255)),
+                ('contents', models.TextField()),
                 ('points', models.IntegerField()),
                 ('solution', models.TextField()),
             ],
@@ -41,7 +42,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('contents', models.TextField()),
                 ('score', models.IntegerField(null=True, blank=True)),
-                ('problems', models.ManyToManyField(to='website.Problem')),
+                ('problem', models.ForeignKey(to='website.Problem')),
             ],
             options={
             },

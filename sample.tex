@@ -11,7 +11,6 @@
 \usetikzlibrary{graphs,graphs.standard}
 \usepackage{color}
 \usepackage{multicol}
-\usepackage{enumerate}
 \usepackage{tikz}
 \usepackage{mathtools}
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
@@ -216,75 +215,6 @@ First we consider the possible doughnut choices with no constraints, which is 12
 \end{align*}
 \end{solution}
 
-\begin{problem}[Shahriari 8.3.1][20]
-\begin{enumerate}[(a)]
-\item Determine the number of permutations of $\{1,2,\cdots, 8 \}$ in which no even integer is in its natural position.
-\item Determine the number of permutations of $\{1,2,\cdots, 8 \}$ in which exactly 4 integers are in their natural position.
-\end{enumerate}
-\end{problem}
-
-\begin{solution}
-\begin{enumerate}[(a)]
-\item We apply theorem 8.25 to the following chessboard. Counting the ways of placing 1,2,3,4 rooks on the forbidden squares is trival, as you are just choosing that many from the 4 available spots.\\
-\begin{tikzpicture}
-\draw[step=1cm,gray,very thin] (-2,-2) grid (6,6);
-\fill[blue!40!white] (-0,4) rectangle (-1,5);
-\fill[blue!40!white] (2,2) rectangle (1,3);
-\fill[blue!40!white] (4,0) rectangle (3,1);
-\fill[blue!40!white] (6,-2) rectangle (5,-1);
-\end{tikzpicture}
-$$\boxed{8!-\binom{4}{1}7!+\binom{4}{2}6!-\binom{4}{3}5!+\binom{4}{4}4!}$$
-\item First we must choose the 4 of the 8 to be ones on the diagonal. Then we must place the remaining 4 in such a way that the other 4 diagonals are now fobidden. 
-$$\binom{8}{4}\times[4!-\binom{4}{1}3!+\binom{4}{2}2!-\binom{4}{3}1!+\binom{4}{4}0!]$$
-\end{enumerate}
-\end{solution}
-
-\begin{problem}[Shahriari 8.3.2][20]
-\begin{enumerate}[(a)]
-\item Eight girls are seated around a carousel. In how many ways can they change seats so that each has a different girl in front of her?
-\item Eight boys are seated around a carousel but facing inward, so that each boy faces one another. In how many ways can they change seats so that each faces a different boy?
-\end{enumerate}
-\end{problem}
-
-\begin{solution}
-\begin{enumerate}[(a)]
-\item Name the 8 girls $1,2,\cdots,8$. 
-$$A_i:=\text{ the circular permutations with $i+1$ in front of $i$}$$
-Noting that $A_8:=$ the circular perms with 1 in front of 8.
-\begin{align*}
-\bigcap_{k=1}^8 A_i^c = \sum_{k=1}^8 \binom{8}{k} (k-1)!
-\end{align*}
-\item 
-\begin{align*}
-\bigcap_{k=1}^8 A_i^c =7!- 2\times \sum_{k=1}^4 \binom{4}{k} (7-k)!
-\end{align*}
-\end{enumerate}
-\end{solution}
-
-\begin{problem}[Shahriari 8.3.6][20]\\
-For each of the $6 \times 6$ boards with forbidden positions in Figure 8.3 in Shahriari's book on page 147, find the number of ways to place six non-attacking rooks in the non-forbidden positions.
-\end{problem}
-
-\begin{solution}
-\begin{enumerate}[(a)]
-\item $r_1 = 6$, $r_2 = 12$ because of the three partitions, choose 2 for the 2 objects, then there are 4 combinations of the two within the chosen partitions (thus $4\times \binom{3}{2}$) , $r_3 = 8$ because one rook must go in each partition, and for each, there is two options (thus $2^3$), $r_i=0$ st $i>3$ because need to place atleast 2 in one partition, which is not allowed.\\
-Thus by Theorem 8.25:
-$$\boxed{6!-6\times5! +12\times 4! -8\times 3!}$$
-
-\item $r_1 = 12$, $r_2 = 2\times \binom{3}{1} + 4^2\times \binom{3}{2} =54$ because either the two are in the same quadrant, or in different quadrants. If they are in the same, first choose the quadrant, and then there are two orthagonal orientations within that quadrant. If they aren't, choose the 2 quadrants for the two rooks, and then there are 4 spaces in each quadrant .\\ $r_3 = 6\times2\times4 + 4^3=112$ since all three can't be in same quadrant, one must be alone and two must the together or they must each be in a different quadrant. There are 6 ways to choose a quadrant for the two and the one. For the quadrant with two, there are two orthagonal orientations within that quadrant and for the quadrant with 1, there are 4 possible locations. If they are each alone, there are four options for the 3 quadrants. \\
- $r_4 = 3\times 4 + 3 \times 2 \times 4 \times 4 = 108$. Since 3 cannot go in the same quadrant, either 2 must go in one quadrant and two in another, or 2 must go in one quadrant. If it is the first case, choose the 2 quadrants, then for each quadrant, there is two orthagonal orientations. If the second case, choose the quadrant with two, determine the orthagonal orientation within that quadrant, then for the other 2 there are 4 possible orientations.\\
-  $r_5 = \binom{3}{1}\times 4\times 2^2 =48$. Since 3 cannot go in the same quadrant, 2 quadrants must both have 2 and the last 1. Choose the quadrant to have one. For that quadrant, the rook has 4 options. For the other two quadrants, there are two orthagonal options each.\\ $r_6 = 2^3$, because there must be 2 rooks in each quadrant. For each quadrant, there are two possible orientations\\
-$r_i=0$ st $i>6$ can't have more than 2 in a given quadrant.\\
-Thus by Theorem 8.25:
-$$\boxed{6!-12\times5! +54\times 4! -112\times 3! + 108\times 2! -48\times 1! + 8}$$
-\item $r_1 = 8$, $r_2 = 3\times 5 + 1 + 6 =22$ because there are 3 cases, either they are both in larger quadrant, or the both the smaller, or 1 in each. If they are in the larger, there is 4 ways by brute force. If they are in the smaller, there is only 1 way. If they are in different, there are $3 \times 5$ ways to order them.  .\\ $r_3 = 1+6\times 3 + 5 = 24$  because there are 3 cases, either all 3 are in larger quadrant, or 2 are in the larger and one in the smaller, 1 in the larger and 2 in the smaller (all 3 can't be in the smaller). If they are in the larger, there is 1 way by brute force. If 2 are in the larger and one in the smaller, there is 6 ways (by brute force in $r_2$) for the two in the larger, and 3 for the smaller. If 1 in the larger and 2 in the smaller, there are 5 ways for the one in the larger and 1 way for the smaller  .\\
- $r_4 = 1\times 3 + 6 = 9$  because there are 2 cases, either 3 are in the larger and one in the smaller, 2 in the larger and 2 in the smaller (more than 2 can't be in the smaller). If they are in the larger, there is 1 way by brute force. If 3 are in the larger and one in the smaller, there is 3 ways (by brute force in $r_3$ for the two in the larger, and 3 for the smaller. If 2 in the larger and 2 in the smaller, there are 6 ways for the two in the larger by brute froce from $r_2$ and 1 way for the smaller  .\\
-  $r_5= 1$  because 3 are in the larger and two in the smaller only has 1 way\\
-$r_i=0$ st $i>5$ can't have more than 2 in a given quadrant.\\
-Thus by Theorem 8.25:
-$$\boxed{6!-8\times5! +22\times 4! -24\times 3! + 9\times 2! -1\times 1!}$$
-\end{enumerate}
-\end{solution}
 
 \begin{problem}[Shahriari 8.3.10][20]\\
 Fereydoon, Faranak, Roudabeh, Tahminen and Rostem are students in the class. Each is to be assigned a differnt dialogue form the following list: Crito, Euthyphro, Protagoras, Meno, Parmenides. Fereydoon is not interested in the Crito or the Protagoras; Faranak is not interested in the Meno; Roudabeh is not interested in the Euthyphro or the Parmenides; Tahmineh is not interested in the Euthyphro and Rostam is not interested in the Crito or the Protagoras. In how many ways can we assign the five dialogues to the five students given the above constraints?
