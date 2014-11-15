@@ -18,6 +18,17 @@ def professor(request):
         form = ProfessorUploadForm()
     return render(request, 'profbig.html', {'form': form})
 
+def student(request):
+    ass = Assignment.objects.all()
+
+    for a in Assignment.objects.all():
+        total_points = 0;
+        for p in a.problems:
+            total_points += p.points
+        a.points = total_points
+
+    return render(request, "index.html", {'assignments': ass})
+
 
 def process_prof_file(file):
     data = file.read()

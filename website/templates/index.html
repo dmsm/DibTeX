@@ -16,57 +16,45 @@
         </tr>
     </thead>
     <tbody>
-       <tr class="danger"> <!--info for blue success for green><!-->
-            <td>11/16/1994</td>
-            <td>Ramsey Theory</td>
+
+        {% for assignment in assignments %}
+        {% if assignment.received_submission == "False" %}
+        <tr class="danger"> <!--info for blue success for green><!-->
+            <td>{{assignment.due_date}}</td>
+            <td>{{assignment.name}}</td>
             <td>Haven't started</td>
-            <td>47/50</td>
-            <td> <form method="get" action="casgt07.pdf">
-<button type="submit">Download .tex file</button>
-</form>
-</td>
+            <td>/{{assignment.points}}</td>
             <td>
-           
-            <div class="fileupload fileupload-new" data-provides="fileupload">
-<div class="input-group">
-<div class="uneditable-input col-lg-3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-default btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><input type="file"><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a></span>
-</div>
-</div>
+                <form method="get" action="casgt07.pdf">
+                 <button type="submit">Download .tex file</button>
+                </form>
+            </td>
+            <td>
+                <div class="fileupload fileupload-new" data-provides="fileupload">
+                    <div class="input-group">
+                        <div class="uneditable-input col-lg-3"><i class="icon-file fileupload-exists"></i>
+                            <span class="fileupload-preview"></span></div>
+                        <span class="btn btn-default btn-file"><span class="fileupload-new">Select file</span>
+                            <span class="fileupload-exists">Change</span>
+                            <input type="file"><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                        </span>
+                    </div>
+                </div>
             </td>
         </tr>
-{% for entry in blog_entries %}
-{% if item.status == "nostart" %}
-                 <tr class="danger"> <!--info for blue success for green><!-->
-            <td>11/16/1994</td>
-            <td>Ramsey Theory</td>
-            <td>Haven't started</td>
-            <td>/50</td>
-            <td> <form method="get" action="casgt07.pdf">
-<button type="submit">Download .tex file</button>
-</form>
-</td>
-            <td>
-           
-            <div class="fileupload fileupload-new" data-provides="fileupload">
-<div class="input-group">
-<div class="uneditable-input col-lg-3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-default btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><input type="file"><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a></span>
-</div>
-</div>
-            </td>
-        </tr>
-            {% else if item.stats = "submitted"%}
+            {% else if assignment.received_submission == "True"%}
                  <tr class="info"> <!--info for blue success for green><!-->
-            <td>11/16/1994</td>
-            <td>Ramsey Theory</td>
+            <td>{{assignment.due_date}}</td>
+            <td>{{assignment.name}}</td>
             <td>Submitted</td>
-            <td>/50</td>
+            <td>47/{{assignment.points}}</td>
             <td> <form method="get" action="casgt07.pdf">
-<button type="submit">Download .tex file</button>
-</form>
-</td>
+                <button type="submit">Download .tex file</button>
+                </form>
+            </td>
             <td>
            
-         Submitted on DATE
+             Submitted on DATE
             </td>
         </tr>
            {% else %}
@@ -76,22 +64,18 @@
             <td>Submitted</td>
             <td>VALUE/50</td>
             <td> <form method="get" action="casgt07.pdf">
-<button type="submit">Download .tex file</button>
-</form>
-</td>
-Submitted on DATE
+            <button type="submit">Download .tex file</button>
+            </form>
+            </td>
+             Submitted on DATE
             <td>
            
             File sumitted on DATE
             </td>
         </tr>
             {% endif %}
-
-
-
-       
+            {% endfor %}
     </tbody>
 </table>
-{% endfor %}
 {% endblock %}
 

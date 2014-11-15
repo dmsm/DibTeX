@@ -39,3 +39,5 @@ class Assignment(models.Model):
     name = models.CharField(max_length=CHARFIELD_MAX_LENGTH)
     due_date = models.DateTimeField()
     problems = models.ManyToManyField(Problem)
+    points = models.IntegerField()
+    received_submission = models.BooleanField(null=True, blank=True)
