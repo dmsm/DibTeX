@@ -1,0 +1,270 @@
+
+% HMC Math dept HW template example
+% v0.04 by Ziv Epstein, 10 Mar 2005
+\documentclass[12pt,letterpaper,boxed]{hmcpset}
+
+% set 1-inch margins in the document
+\usepackage[margin=1in]{geometry}
+\usepackage{marvosym}
+\usepackage{MnSymbol,wasysym}
+\usepackage{tikz}
+\usetikzlibrary{graphs,graphs.standard}
+\usepackage{color}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+
+
+% include this if you want to import graphics files with /includegraphics
+
+
+% info for header block in upper right hand corner
+\name{Ziv Epstein}
+\class{Combinatorics}
+\assignment{Assigment 08}
+\duedate{2014-11-03}
+
+\begin{document}
+\problemlist{Please read through sections (8.3), (9.1), (9.2) of the text.}
+
+Things I found interesting:
+\begin{itemize}
+\item I know this going to sound sappy, but I love that we have find an approximation for $D
+_n$ using e. Combinatorics is a very discrete, integral math, so it is always cool and exciting when weird, irrational numbers that make our lives much easier pop in and say hello.
+\item GF's in general are super interersting, but I'm most intrigued how we can use them to solve recurrences. That proof for the closed form the the $n$th Fibonacci number is as elegant and clean as I have ever seen!
+\item I am also in probability, where we must Moment Generating Functions, which is equal to $E(e^{xT})$ for a given random variable $X$. The idea is tkaing the $n$th derivative and evaluating at zero yeilds the $n$th moment. I'm curious as to whether or not we will use the mehanics of derivatives, especially in this section of exponentials.
+\end{itemize}
+
+\begin{problem}[Shahriari 8.1.1][20]\\
+A coffee company was willing to pay \$1 for each person interviewed about his or her lieks and dislikes on types of cofee. Of the persons interviewed, 270 liked ground coffee, 200 liked instant coffee, 70 liked both, and 50 did not like either choice. What is the total amount of money the company had to pay?
+\end{problem}
+
+\begin{solution}
+This is a sample solution $\frac{1}{2}$
+\end{solution}
+
+\begin{problem}[Shahriari 8.1.3][20]\\
+An advertising agency finds that of its 170 clients, 115 use television, 100 use radio, 130 use magaines, 75 use television and radio, 95 use radio and magazines, 85 use television and magazines and 70 use all three. How many clients use only magazines? How many client use none of these media?
+\end{problem}
+
+\begin{solution}%\textit{(a)}
+Denote $A_m$ as the total people who use magazines, $A_t$ the total people who use televsion and $A_r$ the total people who use radio. By IE Principal we know:
+\begin{align*}  =  A_m & -(A_t \cap A_m)  - (A_r \cap A_m) + (A_r \cap A_t \cap A_m)\\
+&=  130 - 85 -95 +70 \\
+&= \boxed{20}
+\end{align*}
+The number of clients who use none is
+\begin{align*} (A_m^c \cap A_t^c \cap A_r^c) =  S &- A_m -A_t  - A_r \\&+ (A_m \cap A_t)+(A_t \cap A_r) +(A_m \cap A_r) \\&- (A_m \cap A_t \cap A_r) \\
+&=  170 - 130 -100 -115 + 75+95 +85 - 70 \\
+&= \boxed{10}
+\end{align*}
+\end{solution}
+
+\begin{problem}[Shahriari 8.1.4][20]\\
+%powers (9883)
+How many integers between 1 and 10,000 are neither perfect squares nor perfect cubes.
+\end{problem}
+
+\begin{solution}%\textit{(a)}
+\[
+A_s:= \{ \text{perfect squares $< 10,000$} \} \text{ and }\\
+A_c:= \{ \text{perfect cubes $< 10,000$} \}
+\]
+\begin{align*}
+| A_s^c \cap A_c^c | &= 10,000-|A_s| - |A_c| + |A_s \cap A_c|\\
+&=10,000 - \floor*{\sqrt{10,000}} - \floor*{\sqrt[3]{10,000}} + \floor*{\sqrt[6]{10,000}}\\
+&=\boxed{9883}
+\end{align*}
+\end{solution}
+
+\begin{problem}[Shahriari 8.1.6][20]\\
+How many permutations of the letters \textbf{SCRIPPS} have no two consecutive letters the same?
+\end{problem}
+
+\begin{solution}%\textit{(a)}
+\[
+A_s:= \{ \text{permutations with \textbf{SS}} \} \text{ and }\\
+A_p:= \{ \text{permutations with \textbf{PP}} \}
+\]
+
+\begin{align*}
+\mid A_s^c \cap A_p^c \mid &= S - \mid A_s \mid- \mid A_p \mid+ \mid A_p \cap A_s \mid\\
+&=\frac{7!}{2! \times 2!} - 2 \times \frac{6!}{2!} + 5!\\
+&= \boxed{\frac{7!}{4} - 6! + 5!}\\
+\end{align*}
+$S$ is all permutations of \textbf{SCRIPPS} (taking into account \textbf{S} and \textbf{P} appear twice). $\mid A_s \mid$ and $\mid A_s \mid$ are computing by finding the permutations of \textbf{SCRIPPS} where \textbf{SS} and \textbf{PP} have been glued together to form a super letter, repsectively.  $ \mid A_p \cap A_s \mid$ is computed by gluing both letters together
+\end{solution}
+
+
+\begin{problem}[Shahriari 8.1.8][20]\\
+Lewis Carrol speaks of a battle among 100 combatants in which 80 lost an arm, 85 a leg, 70 an eye and 75 an ear. Some number $p$ of people lost all four. Find the lower and upper bound for $p$.
+\end{problem}
+
+\begin{solution}
+$$10 \leq p \leq 70$$
+For upper bound, consider the case in which all the people who lost an eye is a subset of the people who lost an ear wich is a subset of the people who lost an arm which is a subset of the people who lost a leg. In this case, 70 people lost all 4.\\
+Consider the case in which each of the 100 combatants lost 3 limbs (this minimizes the intersection of all 4). The total sum of the 4 categories in that case would be 300. However in this case the total sum of the 4 categories is 310. Thus there must be at alteast 10 people who have all 4.
+\end{solution}
+
+\begin{problem}[Shahriari 8.1.10][20]\\
+How many five-card hands contain a jack, a queen and king?
+\end{problem}
+
+\begin{solution}%\textit{(a)}
+\[
+A_j:= \{ \text{hands without a jack} \} \text{ and }\\
+A_q:= \{ \text{hands without a queen} \}\\
+\] \[
+A_k:= \{ \text{hands without a king} \}
+\]
+Note that since $A_j = A_k = A_q$ we just use $A_j$ in the symmetric case, and expand to use the others when necessary
+\begin{align*}
+|A_j^c \cap A_q^c \cap A_k^c | &= |S| \\
+& - \binom{3}{1}|A_j|  \\
+& + \binom{3}{2} \mid A_j \cap A_k \mid \\
+&-\binom{3}{3}\mid A_j \cap A_k \cap A_q \mid\\
+&=\boxed{\binom{52}{5}-\binom{3}{1}\binom{48}{5}+\binom{3}{2}\binom{44}{5} -\binom{3}{3}\binom{40}{5}}
+\end{align*}
+\end{solution}
+
+
+
+\begin{problem}[Shahriari 8.1.14][20]\\
+How many permutations of the 26 letters are there that contain none of the sequences MATH, RUNS, FROM or JOE?
+\end{problem}
+
+\begin{solution}
+\[
+A_m:= \{ \text{permutations with MATH} \}
+A_r:= \{ \text{permutations with RUNS} \}
+\] \[
+A_f:= \{ \text{permutations with FROM} \}
+A_j:= \{ \text{permutations with JOE} \}
+\]
+Since $\mid A_m \mid=\mid A_r \mid=\mid A_f \mid$, we will use $A_m$ for symmetry and the others when necessary.
+\begin{align*}
+|A_m^c \cap A_r^c \cap A_f^c \cap A_j^c| &= |S| \\
+& - \binom{3}{1}|A_m|^*- |A_j| \\
+& + |A_m \cap A_r| + |A_m \cap A_j| + |A_r \cap A_j| + |A_f \cap A_m | \\
+&-|A_m \cap A_r \cap A_j|\\
+&+|A_r \cap A_m \cap A_f \cap  A_j|\\
+&=\boxed{26!-3 \times 23! - 24!+ 20! + 2 \times 21! + 19! - 18!}
+\end{align*}
+Note that cases are ommited when they are impossible, such as both JOE and FROM appearing in the permutation, since they both require an O. Also note our methodolgy groups the word into its own letter and permutes the new alphabet.
+*Since $\mid A_m \mid=\mid A_r \mid=\mid A_f \mid$, we will use $A_m$ for symmetry and the others when necessary.
+\end{solution}
+
+\begin{problem}[Shahriari 8.1.15][20]\\
+Find the number of primes less than 100 without actually finding all the primes
+\end{problem}\\
+
+\begin{solution}%\textit{(a)}
+\[
+A_2:= \{ \text{numbers divisible by 2} \},
+A_3:= \{ \text{numbers divisible by 3} \},
+\] \[
+A_5:= \{ \text{numbers divisible by 5} \},
+A_7:= \{ \text{numbers divisible by 7} \}
+\]
+\begin{align*}
+|A_2^c \cap A_3^c \cap A_5^c \cap A_7^c| &= |S| \\
+& - |A_2| - |A_3| - |A_5| - |A_7| \\
+& + |A_2 \cap A_3| - |A_2 \cap A_5| - |A_2 \cap A_7| - |A_3 \cap A_5| - |A_3 \cap A_7|-|A_5 \cap A_7|  \\
+&-|A_2 \cap A_3 \cap A_5|-|A_2 \cap A_3 \cap  A_7|-|A_2  \cap A_5 \cap  A_7|- | A_3 \cap A_5 \cap  A_7|\\
+&+|A_2 \cap A_3 \cap A_5 \cap  A_7|\\
+&=99-\floor*{100/2}-\floor*{100/3}-\floor*{100/5}-\floor*{100/7}\\
+&+\floor*{100/6}+\floor*{100/10}+\floor*{100/15}+\floor*{100/35}+\floor*{100/14}+\floor*{100/21}\\
+&-\floor*{100/30}-\floor*{100/63}-\floor*{100/70}-\floor*{100/104}\\
+&+\floor*{100/210}\\
+&=100-50-33-20-14+16+10+6+2+7+4-3-1-1-0+0\\
+&=\boxed{25}
+\end{align*}
+\end{solution}
+
+\begin{problem}[Shahriari 8.2.1][20]
+Determine the number of 10-combintions of the multiset
+$$S = \{ \infty \cdot a, 3 \cdot b, 5 \cdot c, 7 \cdot d \}$$
+\end{problem}
+
+\begin{solution}%\textit{(a)}
+\center{ $A_1 := $ \{submultisets of size 10 with more than 3 b's.\}}\\
+\center{ $A_2 := $ \{submultisets of size 10 with more than 5 c's.\}}\\ 
+\center{ $A_3 := $ \{submultisets of size 10 with more than 7 d's.\}}\\
+For S, we consider the 10-combinations in which there are not constraints on the number of a,b,c, and d's allowed. We then subtract $A_1$, in which 4 of the 10 are b's. We then must fill the remaining 6 with any number of a,b,c and d's. This method is repeated for $A_2$, $A_3$ and the intersections.
+\begin{align*}
+= (\binom{10}{4}) - (\binom{6}{4}) - (\binom{4}{4}) -(\binom{4}{2})+1\\
+= \binom{13}{4}-\binom{9}{4}-\binom{7}{4}-\binom{5}{4} + 1
+\end{align*}
+\end{solution}
+
+\begin{problem}[Shahriari 8.2.3][20]\\
+A bakery sells seven kinds of doughnuts. How many ways are there to choose one dozen donuts if no more than three donughts of any kind are used?
+\end{problem}
+
+\begin{solution}
+$$A_{i,j,k}:=\text{ Ordering that has more than 3 of an arbitrary dougnut type of which there are 7}$$
+First we consider the possible doughnut choices with no constraints, which is 12 mulichoose 7. Then applying the symetric IE principle we choose one of the doughnuts and consider when we have 4 of that dougnut. Then we must fill out the remaining 8 slots from the 7 dougnuts. Then we choose 2 of the 7 doughnuts, put 4 of the first kind in, 4 of the second kind in, then order the remaining 4 from the 7 possible types. Finally, choose 3 from the 7 and put 4 of each into the box.
+\begin{align*}
+&=(\binom{12}{7}) - \binom{7}{1} A_{d_i} + \binom{7}{2} (A_{d_i} \cap A_{d_j}) - \binom{7}{3} (A_{d_i} \cap A_{d_j} \cap A_{d_k})\\
+&=(\binom{12}{7}) - \binom{7}{1} (\binom{8}{7}) + \binom{7}{2} (\binom{4}{7}) - \binom{7}{3} \\
+&=\boxed{\binom{18}{7} - \binom{7}{1} \binom{14}{7} + \binom{7}{2} \binom{10}{7} - \binom{7}{3}} \\
+\end{align*}
+\end{solution}
+
+
+\begin{problem}[Shahriari 8.3.10][20]\\
+Fereydoon, Faranak, Roudabeh, Tahminen and Rostem are students in the class. Each is to be assigned a differnt dialogue form the following list: Crito, Euthyphro, Protagoras, Meno, Parmenides. Fereydoon is not interested in the Crito or the Protagoras; Faranak is not interested in the Meno; Roudabeh is not interested in the Euthyphro or the Parmenides; Tahmineh is not interested in the Euthyphro and Rostam is not interested in the Crito or the Protagoras. In how many ways can we assign the five dialogues to the five students given the above constraints?
+\end{problem}
+
+\begin{solution}
+Consider the following rook problem with the columns corresnonding to Fereydoon, Faranak, Roudabeh, Tahminen and Rostem and the rows corresponding to Crito, Euthyphro, Protagoras, Meno, Parmenides.\\
+\center{\begin{tikzpicture}
+\draw[step=1cm,gray,very thin] (0,0) grid (5,5);
+\fill[blue!40!white] (0,4) rectangle (1,5);
+\fill[blue!40!white] (0,2) rectangle (1,3);
+\fill[blue!40!white] (1,1) rectangle (2,2);
+\fill[blue!40!white] (2,0) rectangle (3,1);
+\fill[blue!40!white] (2,3) rectangle (3,4);
+\fill[blue!40!white] (3,3) rectangle (4,4);
+\fill[blue!40!white] (4,4) rectangle (5,5);
+\fill[blue!40!white] (4,2) rectangle (5,3);
+\end{tikzpicture}}\\
+We shall solve this problem though brute force. Denote $A_{Fe}, A_{Fa},A_{Ra},A_T,A_{Ro}$ the combiations in which Fereydoon, Faranak, Roudabeh, Tahminen and Rostem get dialogues they are uninterested in.
+We will compute this taking the total amount, subtracting the pairwise possibilies ($\binom{5}{2}=10$ of them), adding the three way possibilities ($\binom{5}{3}=10$ of them), subtracting the four way possibilities ($\binom{5}{4}=5$ of them), and adding the 5 way possibilities.
+\begin{align*}
+= 5!&-2-1-2-1-2\\
+	&+2+4+2+2+2+1+2+1+2+2 \\
+	&-4-2-2-2-2-1-2-2-4-4\\
+	&+2+2+2+4+4\\
+	&-2\\
+	&=\boxed{119}
+\end{align*}
+
+\end{solution}
+
+\begin{problem}[Shahriari 8.X.1][20]\\
+ Twelve citizens vote for two candidates in a college election. It happens that the vote
+is tied 6 to 6. However, for dramatic effect, the ballots are shuffled and read out one at a time
+and the cumulative score announced. What is the probability that at some point there is a
+gap of 3 votes between the two candidates? Is it closer to 47\% or 48\%?
+\end{problem}
+
+
+\begin{solution}
+The following is the number of ways such that the gap is two or less the entire time. 
+We calculate the number of ways to move along this using the recursive augmnetation method discussed in the solutions to 3.1.6, MATHEMATICS. We subtract this result, 486, from the total possible results (note the total possible ways of is anagrams for aaaaaabbbbbb)
+$$=\frac{\frac{12!}{6!^2}-486}{\frac{12!}{6!^2}} = 47.4\%$$ which is closer to 47\% than to 48\%
+\\
+\\
+\\
+\\
+
+Below is the diagram that shows the method for counting the ways of stepping through the anagram without there existing a point where the different in votes is three or more.
+\end{solution}
+
+
+\end{document}
+
