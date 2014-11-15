@@ -51,15 +51,13 @@ def process_prof_file(file):
 def strip_solutions(asgt):
     problems_file = open(asgt.name + aggregator.TEX_FILE, 'w')
     aggregator.print_header(problems_file)
-    print("\\name{" + asgt.name + "}", file=problems_file)
-    print("\duedate{" + asgt.due_date + "}", file=problems_file)
-    print("\\begin{document}", file=problems_file)
+    print(r"\\name{" + asgt.name + "}", file=problems_file)
+    print(r"\duedate{" + asgt.due_date + "}", file=problems_file)
+    print(r"\\begin{document}", file=problems_file)
     for p in asgt.problems.all():
-        prob = r"\begin{problem}[" + p.name + "][" + str(p.points) + "]\\"
+        prob = r"\begin{problem}[" + p.name + "][" + str(p.points) + r"]\\"
         print(prob, file=problems_file)
-        print("\end{problem}", file=problems_file)
-        for i in range(0, 10):
-            print("\n", file=problems_file)
+        print(r"\end{problem}", file=problems_file)
 
-    print("\end{document}",file=problems_file)
+    print(r"\end{document}",file=problems_file)
     return problems_file
