@@ -24,6 +24,7 @@ class Problem(models.Model):
     name = models.CharField(max_length=CHARFIELD_MAX_LENGTH)
     points = models.IntegerField()
     solution = models.TextField()
+    graders = models.ManyToManyField(UserProfile)
 
 
 class Submission(models.Model):
