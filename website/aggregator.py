@@ -27,8 +27,8 @@ def print_header(submission_file):
     print(r"\usepackage{enumerate}", file=submission_file)
     print(r"\usepackage{tikz}", file=submission_file)
     print(r"\usepackage{mathtools}", file=submission_file)
-    print(r"\DeclarePairedDelimiter\ceil{\lceil}{\\rceil}", file=submission_file)
-    print(r"\DeclarePairedDelimiter\\floor{\\lfloor}{\\rfloor}", file=submission_file)
+    print(r"\DeclarePairedDelimiter\ceil{\lceil}{\rceil}", file=submission_file)
+    print(r"\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}", file=submission_file)
     print(r"% include this if you want to import graphics files with /includegraphics", file=submission_file)
 
 def aggregate(self, student_id, submissions):
