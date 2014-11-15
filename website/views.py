@@ -8,6 +8,7 @@ import re
 import os
 import aggregator
 from website.models import Assignment, Problem
+import package_problems
 
 def professor(request):
     if request.method == 'POST':
@@ -18,6 +19,26 @@ def professor(request):
     else:
         form = ProfessorUploadForm()
     return render(request, 'profbig.html', {'form': form})
+
+def student(request):
+    ass = Assignment.objects.all()
+
+    for a in Assignment.objects.all():
+        total_points = 0;
+        for p in a.problems:
+            total_points += p.points
+        a.points = total_points
+
+    return render(request, "index.html", {'assignments': ass})
+
+def grader(request):
+    ass = Assignment.objects.all()
+    list_of_list_of_problems = {}
+    for a in ass:
+        problems = package_problems.problem_answer_pairings(a)
+        list_of_list_of_problems.append(problems)
+
+    return render(request, "grader.html", {'problem_solution_pair_list': list_of_list_of_problems})
 
 
 def process_prof_file(file):
