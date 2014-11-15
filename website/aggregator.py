@@ -16,38 +16,38 @@ def create_id_map(self, student_id, student_name):
     self.student_map[student_id] = student_name
 
 def print_header(submission_file):
-    print("\documentclass[12pt,letterpaper,boxed]{hmcpset}", file=submission_file)
-    print("% set 1-inch margins in the document", file=submission_file)
-    print("\usepackage[margin=1in]{geometry}", file=submission_file)
-    print("\usepackage{marvosym}", file=submission_file)
-    print("\usepackage{MnSymbol,wasysym}", file=submission_file)
-    print("\usepackage{tikz}", file=submission_file)
-    print("\usetikzlibrary{graphs,graphs.standard}", file=submission_file)
-    print("\usepackage{color}", file=submission_file)
-    print("\usepackage{enumerate}", file=submission_file)
-    print("\usepackage{tikz}", file=submission_file)
-    print("\usepackage{mathtools}", file=submission_file)
-    print("\DeclarePairedDelimiter\ceil{\lceil}{\\rceil}", file=submission_file)
-    print("\DeclarePairedDelimiter\\floor{\\lfloor}{\\rfloor}", file=submission_file)
-    print("% include this if you want to import graphics files with /includegraphics", file=submission_file)
+    print(r"\documentclass[12pt,letterpaper,boxed]{hmcpset}", file=submission_file)
+    print(r"% set 1-inch margins in the document", file=submission_file)
+    print(r"\usepackage[margin=1in]{geometry}", file=submission_file)
+    print(r"\usepackage{marvosym}", file=submission_file)
+    print(r"\usepackage{MnSymbol,wasysym}", file=submission_file)
+    print(r"\usepackage{tikz}", file=submission_file)
+    print(r"\usetikzlibrary{graphs,graphs.standard}", file=submission_file)
+    print(r"\usepackage{color}", file=submission_file)
+    print(r"\usepackage{enumerate}", file=submission_file)
+    print(r"\usepackage{tikz}", file=submission_file)
+    print(r"\usepackage{mathtools}", file=submission_file)
+    print(r"\DeclarePairedDelimiter\ceil{\lceil}{\\rceil}", file=submission_file)
+    print(r"\DeclarePairedDelimiter\\floor{\\lfloor}{\\rfloor}", file=submission_file)
+    print(r"% include this if you want to import graphics files with /includegraphics", file=submission_file)
 
 def aggregate(self, student_id, submissions):
     name = self.student_map[student_id]
     submission_file = open(name + self.assignment_name + self.TEX_FILE, 'a')
     print_header(submission_file)
 
-    print("\\name{" + name + "}", file=submission_file)
-    print("\duedate{" + assignment_due_date + "}", file=submission_file)
-    print("\\begin{document}", file=submission_file)
+    print(r"\name{" + name + "}", file=submission_file)
+    print(r"\duedate{" + assignment_due_date + "}", file=submission_file)
+    print(r"\begin{document}", file=submission_file)
 
     for submission in submissions:
-        header = "\\begin{problem}[" + submission.problem.name + "]["+\
-                 submission.score + "/" + submission.problem.points + "]\\"
+        header = r"\begin{problem}[" + submission.problem.name + "]["+\
+                 submission.score + "/" + submission.problem.points + r"]\\"
         print(header, file=submission_file)
         print(submission.problem.contents, file=submission_file)
-        print("\end{problem}", file=submission_file)
+        print(r"\end{problem}", file=submission_file)
         print(r'\begin{solution}', file=submission_file)
         print(submission.problem.solution, file=submission_file)
-        print("\end{solution}", file=submission_file)
+        print(r"\end{solution}", file=submission_file)
 
-    print("\end{document}",file=submission_file)
+    print(r"\end{document}",file=submission_file)
