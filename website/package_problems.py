@@ -40,6 +40,7 @@ def problem_solution_file(problem):
 def submission_files(submission):
     name = submission.problem.name
     submission_file = open("SUBMISSION-" + name, 'a')
+    aggregator.print_header(submission_file)
     p_h = r"\begin{problem}[" + submission.problem.name + "][" + submission.problem.points + r"]\\"
     print(p_h, file=submission_file)
     print(submission.problem.content, file=submission_file)
