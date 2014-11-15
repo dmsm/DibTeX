@@ -2,15 +2,11 @@ from models import Assignment, Problem, Submission
 
 student_map = {}
 assignment_name = ""
-assignment_class = ""
 assignment_due_date = ""
 TEX_FILE = ".tex"
 
 def set_assignment_name(self, name):
     self.assignment_name = name
-
-def set_class(self, class_name):
-    self.assignment_class = class_name
 
 def set_due_date(self, due_date):
     self.assignment_due_date = due_date
@@ -40,8 +36,6 @@ def aggregate(self, student_id, submissions):
     print_header(submission_file)
 
     print("\\name{" + name + "}", submission_file)
-    print("\class{" + assignment_class + "}", submission_file)
-    print("\class{" + assignment_name + "}", submission_file)
     print("\duedate{" + assignment_due_date + "}", submission_file)
     print("\\begin{document}", submission_file)
 

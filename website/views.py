@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 import re
+import aggregator
 from website.models import Assignment, Problem
 
 def professor(request):
@@ -43,6 +44,22 @@ def process_prof_file(file):
         p.solution = q.group(1)
         p.save()
         asgt.problems.add(p)
+
+def strip_solutions(asgt):
+    problems_file = open(asgt.name + aggregator.TEX_FILE, 'a')
+    aggregator.print_header(problems_file)
+    print("\\name{" + asgt.name + "}", problems_file)
+    print("\duedate{" + asgt.due_date + "}", problems_file)
+    print("\\begin{document}", problems_file)
+    for p in asgt.problems:
+        prob = "\begin{problem}[" + p.name + "][" + p.points + "]\\"
+        print(prob, problems_file)
+        print("\end{problem}", problems_file)
+        for i in range(0, 10):
+            print("\\", problems_file)
+
+    print("\end{document}",problems_file)
+    return problems_file
 
     # def register(request):
     #     # Like before, get the request's context.
