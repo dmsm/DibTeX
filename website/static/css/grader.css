@@ -8,7 +8,7 @@
 }
 
 .row #picturecontainer {
-	text-align: center;
+
 	padding-bottom: 30px;
 }
 
@@ -46,8 +46,8 @@ padding-bottom: 30px;
 }
 
 object{
-height: 500px;
-width: 500px;
+height: 580px;
+width: 600px;
 border: 3px solid #eeeeee;
 }
 
@@ -65,7 +65,7 @@ border: 3px solid #eeeeee;
 }
 
 #comment {
-	width: 300px;
+	width: 500px;
 	float: left;
 	margin-left: auto;
 	margin-right: auto;
@@ -75,7 +75,7 @@ border: 3px solid #eeeeee;
 #rating {
 	width: 80px;
 	margin-top: 40px;
-	margin-left: 320px;
+	margin-left: 100px;
 
 }
 
