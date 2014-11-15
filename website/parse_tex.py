@@ -1,7 +1,7 @@
 import re
 from models import Assignment, Problem
 
-file = open("sample.tex", "r")
+file = open("management/commands/sample.tex", "r")
 data = file.read()
 
 m = re.search(r"assignment{(.*)}", data)
