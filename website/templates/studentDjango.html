@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}test{% endblock %}
+{% endblock %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Assignment</th>
+            <th>Status</th>
+            <th>Grade</th>
+            <th>File</th>
+            <th>Submisstion</th>
+        </tr>
+    </thead>
+    <tbody>
+       <tr class="danger"> <!--info for blue success for green><!-->
+            <td>11/16/1994</td>
+            <td>Ramsey Theory</td>
+            <td>Haven't started</td>
+            <td>47/50</td>
+            <td> <form method="get" action="casgt07.pdf">
+<button type="submit">Download .tex file</button>
+</form>
+</td>
+            <td>
+           
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+<div class="input-group">
+<div class="uneditable-input col-lg-3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-default btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><input type="file"><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a></span>
+</div>
+</div>
+            </td>
+        </tr>
+       
+    </tbody>
+</table>
