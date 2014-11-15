@@ -55,8 +55,8 @@ def strip_solutions(asgt):
     print(r"\duedate{" + asgt.due_date + "}", file=problems_file)
     print(r"\\begin{document}", file=problems_file)
     for p in asgt.problems.all():
-        prob = r"\begin{problem}[" + p.name + "][" + str(p.points) + r"]\\"
-        print(prob.content, file=problems_file)
+        print(r"\begin{problem}[" + p.name + "][" + str(p.points) + r"]", file=problems_file)
+        print(p.contents, file=problems_file)
         print(r"\end{problem}", file=problems_file)
 
     print(r"\end{document}",file=problems_file)
