@@ -23,6 +23,7 @@ class UserProfile(models.Model):
 class Problem(models.Model):
     name = models.CharField(max_length=CHARFIELD_MAX_LENGTH)
     points = models.IntegerField()
+    contents = models.TextField()
     solution = models.TextField()
     graders = models.ManyToManyField(UserProfile)
 
