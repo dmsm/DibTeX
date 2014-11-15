@@ -22,6 +22,7 @@ class UserProfile(models.Model):
 
 class Problem(models.Model):
     name = models.CharField(max_length=CHARFIELD_MAX_LENGTH)
+    contents = models.TextField()
     points = models.IntegerField()
     solution = models.TextField()
     graders = models.ManyToManyField(UserProfile)
@@ -29,7 +30,7 @@ class Problem(models.Model):
 
 class Submission(models.Model):
     student = models.ForeignKey(UserProfile)
-    problems = models.ManyToManyField(Problem)
+    problem = models.ForeignKey(Problem)
     contents = models.TextField()
     score = models.IntegerField(null=True, blank=True)
 
