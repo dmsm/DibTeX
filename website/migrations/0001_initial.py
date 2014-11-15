@@ -18,6 +18,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=255)),
                 ('due_date', models.DateTimeField()),
+                ('points', models.IntegerField(null=True, blank=True)),
+                ('received_submission', models.BooleanField(default=True)),
             ],
             options={
             },
@@ -58,12 +60,6 @@ class Migration(migrations.Migration):
             options={
             },
             bases=(models.Model,),
-        ),
-        migrations.AddField(
-            model_name='submission',
-            name='student',
-            field=models.ForeignKey(to='website.UserProfile'),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='problem',

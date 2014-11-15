@@ -1,0 +1,27 @@
+\documentclass[12pt,letterpaper,boxed]{hmcpset}
+% set 1-inch margins in the document
+\usepackage[margin=1in]{geometry}
+\usepackage{marvosym}
+\usepackage{MnSymbol,wasysym}
+\usepackage{tikz}
+\usetikzlibrary{graphs,graphs.standard}
+\usepackage{color}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+% include this if you want to import graphics files with /includegraphics
+\begin{document}
+\begin{problem}[Shahriari 8.1.1][20]\\
+\\
+A coffee company was willing to pay \$1 for each person interviewed about his or her lieks and dislikes on types of cofee. Of the persons interviewed, 270 liked ground coffee, 200 liked instant coffee, 70 liked both, and 50 did not like either choice. What is the total amount of money the company had to pay?
+\
+\end{problem}
+\begin{solution}
+
+Sum all the people and subtract out the double counted people:
+$$270+200+50-70 = \boxed{450}$$
+
+\end{solution}
+\end{document}

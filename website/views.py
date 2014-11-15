@@ -33,7 +33,7 @@ def student(request):
     if request.method == 'POST':
         form = ProfessorUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            # process_student_file(request.FILES['file'])
+            process_student_file(request.FILES['file'])
             return render(request, 'index.html', {'assignments': ass, 'form': form, 'success': "Submitted"})
     else:
         form = ProfessorUploadForm()
@@ -41,13 +41,11 @@ def student(request):
     return render(request, "index.html", {'assignments': ass, 'form': form})
 
 def grader(request):
-    ass = Assignment.objects.all()
-    list_of_list_of_problems = {}
-    for a in ass:
-        problems = package_problems.problem_answer_pairings(a)
-        list_of_list_of_problems.append(problems)
+    sub = Submission.objects.all()[0]
+    package_problems.problem_solution_file(sub.problem)
+    package_problems.submission_files(sub)
 
-    return render(request, "grader.html", {'problem_solution_pair_list_list': list_of_list_of_problems})
+    return render(request, "grader.html", {'problem': sub.problem.pk, 'submission': sub.pk})
 
 
 def process_prof_file(file):
@@ -96,7 +94,7 @@ def strip_solutions(asgt):
 
 def process_student_file(file):
     data = file.read()
-
+    print (data)
     problem_locs = [m.end() for m in re.finditer("begin{problem}", data)]
 
     for loc in problem_locs:
@@ -111,6 +109,3 @@ def process_student_file(file):
         p = Problem.objects.get(name=s.name)
         s.problem = p
         s.save()
-
-    os.system("pdflatex %s" % asgt.pk + aggregator.TEX_FILE)
-    os.system("mv ./%s.pdf ./website/static/asgts/" % asgt.pk)
