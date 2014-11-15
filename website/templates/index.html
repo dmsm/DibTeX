@@ -3,7 +3,7 @@
 {% block title %}test{% endblock %}
 
 {% block content %}
-
+{{ success }}
 <table class="table">
     <thead>
         <tr>
@@ -18,15 +18,16 @@
     <tbody>
 
         {% for assignment in assignments %}
-        {% if assignment.received_submission == "False" %}
+
         <tr class="danger"> <!--info for blue success for green><!-->
             <td>{{assignment.due_date}}</td>
             <td>{{assignment.name}}</td>
             <td>Haven't started</td>
-            <td>/{{assignment.points}}</td>
+            <td>?/{{assignment.points}}</td>
             <td>
                 <form method="get" action="casgt07.pdf">
-                 <button type="submit">Download .tex file</button>
+                 <a>TeX</a>
+                 <a  href="/static/asgts/{{ assignment.pk }}.pdf">PDF</a>
                 </form>
             </td>
             <td>
@@ -36,44 +37,16 @@
                             <span class="fileupload-preview"></span></div>
                         <span class="btn btn-default btn-file"><span class="fileupload-new">Select file</span>
                             <span class="fileupload-exists">Change</span>
-                            <input type="file"><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                            <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
+                            {{ form.file }}
+                                <input type="submit" value="Submit">
+                                </form>
                         </span>
                     </div>
                 </div>
             </td>
         </tr>
-            {% else if assignment.received_submission == "True"%}
-                 <tr class="info"> <!--info for blue success for green><!-->
-            <td>{{assignment.due_date}}</td>
-            <td>{{assignment.name}}</td>
-            <td>Submitted</td>
-            <td>47/{{assignment.points}}</td>
-            <td> <form method="get" action="casgt07.pdf">
-                <button type="submit">Download .tex file</button>
-                </form>
-            </td>
-            <td>
-           
-             Submitted on DATE
-            </td>
-        </tr>
-           {% else %}
-           <tr class="info"> <!--info for blue success for green><!-->
-            <td>11/16/1994</td>
-            <td>Ramsey Theory</td>
-            <td>Submitted</td>
-            <td>VALUE/50</td>
-            <td> <form method="get" action="casgt07.pdf">
-            <button type="submit">Download .tex file</button>
-            </form>
-            </td>
-             Submitted on DATE
-            <td>
-           
-            File sumitted on DATE
-            </td>
-        </tr>
-            {% endif %}
+
             {% endfor %}
     </tbody>
 </table>
