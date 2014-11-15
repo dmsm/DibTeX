@@ -1,5 +1,5 @@
-from models import Assignment, Problem, Submission
 from __future__ import print_function
+from models import Assignment, Problem, Submission
 
 student_map = {}
 assignment_name = ""
