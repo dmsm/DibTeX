@@ -46,7 +46,7 @@ def aggregate(self, student_id, submissions):
         print(header, file=submission_file)
         print(submission.problem.contents, file=submission_file)
         print("\end{problem}", file=submission_file)
-        print("\\begin{solution}", file=submission_file)
+        print(r'\begin{solution}', file=submission_file)
         print(submission.problem.solution, file=submission_file)
         print("\end{solution}", file=submission_file)
 

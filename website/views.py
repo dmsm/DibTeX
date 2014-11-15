@@ -59,7 +59,7 @@ def strip_solutions(asgt):
         print(prob, file=problems_file)
         print("\end{problem}", file=problems_file)
         for i in range(0, 10):
-            print("\\", file=problems_file)
+            print(r"\\", file=problems_file)
 
     print("\end{document}",file=problems_file)
     return problems_file
