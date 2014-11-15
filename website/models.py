@@ -29,7 +29,6 @@ class Problem(models.Model):
 
 
 class Submission(models.Model):
-    student = models.ForeignKey(UserProfile)
     problem = models.ForeignKey(Problem)
     contents = models.TextField()
     score = models.IntegerField(null=True, blank=True)
@@ -39,5 +38,5 @@ class Assignment(models.Model):
     name = models.CharField(max_length=CHARFIELD_MAX_LENGTH)
     due_date = models.DateTimeField()
     problems = models.ManyToManyField(Problem)
-    points = models.IntegerField()
-    received_submission = models.BooleanField(null=True, blank=True)
+    points = models.IntegerField(null=True, blank=True)
+    received_submission = models.BooleanField(default=True)
