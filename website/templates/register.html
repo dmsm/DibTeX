@@ -14,7 +14,8 @@
   <body>
   	<div class="container">
 
-      <form class="form-signin" role="form">
+      <form class="form-signin" role="form" id="user_form" action="/website/register"
+            enctype="multipart/form-data">
         <h2 class="form-signin-heading">Sign Up</h2>
         <label for="inputName" class="sr-only">First Name</label>
         <input type="name" id="inputName" class="form-control" placeholder="First Name" required autofocus>
@@ -27,8 +28,20 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit" id="signUpButton">Sign Up</button>
+        {% if not registered %}
+
+        {% csrf_token %}
+
+            <!-- Display each form. The as_p method wraps each element in a paragraph
+                 (<p>) element. This ensures each element appears on a new line,
+                 making everything look neater. -->
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="registerButton" name="submit" value="Register">Register
+        </button>
       </form>
+      {% endif %}
 
     </div> <!-- /container -->
 

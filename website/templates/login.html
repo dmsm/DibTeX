@@ -14,12 +14,13 @@
   <body>
   	<div class="container">
 
-      <form class="form-signin" role="form">
+      <form class="form-signin" role="form" id="login_form" method="post" action="/website/login/">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputEmail" class="sr-only">Username</label>
+        {% csrf_token %}
+        <input type="text" name="username" value="" class="form-control" placeholder="Username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password" name="password" class="form-control" value="" placeholder="Password" required>
         <table>
         	<tr>
         		<td>
@@ -30,7 +31,7 @@
 				       </div>
         		</td>
         		<td>
-        			<div> <a href="signup.html"> Sign Up </a> </div>
+        			<div> <a href="/website/register/">Register Here</a> </div>
         		</td>
         	</tr>
         </table>
