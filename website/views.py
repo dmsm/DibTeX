@@ -58,8 +58,6 @@ def strip_solutions(asgt):
         prob = r"\begin{problem}[" + p.name + "][" + str(p.points) + r"]\\"
         print(prob, file=problems_file)
         print(r"\end{problem}", file=problems_file)
-        for i in range(0, 10):
-            print(r"\\", file=problems_file)
 
     print(r"\end{document}",file=problems_file)
     return problems_file
