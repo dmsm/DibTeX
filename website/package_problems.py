@@ -22,3 +22,28 @@ def problem_answer_pairings(asgt):
         problem_pairings.append(problem_file, solution_file)
 
     return problem_pairings
+
+
+def problem_solution_file(problem):
+    name = problem.name
+    problem_file = open(name, 'a')
+    aggregator.print_header(problem_file)
+    p_h = r"\begin{problem}[" + problem.name + "][" + problem.points + r"]\\"
+    print(p_h, file=problem_file)
+    print(problem.content, file=problem_file)
+    print(r"\end{problem}", file=problem_file)
+    print(r"\begin{solution}", file=problem_file)
+    print(problem.solution, file=problem_file)
+    print(r"\end{solution}", file=problem_file)
+
+
+def submission_files(submission):
+    name = submission.problem.name
+    submission_file = open("SUBMISSION-" + name, 'a')
+    p_h = r"\begin{problem}[" + submission.problem.name + "][" + submission.problem.points + r"]\\"
+    print(p_h, file=submission_file)
+    print(submission.problem.content, file=submission_file)
+    print(r"\end{problem}", file=submission_file)
+    print(r"\begin{solution}", file=submission_file)
+    print(submission.contents, file=submission_file)
+    print(r"\end{solution}", file=submission_file)
